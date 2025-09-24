@@ -1,5 +1,5 @@
 import React from "react";
-import useScrollReveal  from './useScrollReveal';
+import { useScrollReveal }  from './useScrollReveal';
 
 const steps = [
   {
