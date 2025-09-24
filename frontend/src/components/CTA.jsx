@@ -6,10 +6,27 @@ function CTA({ onPreBook }) {
   const [email, setEmail] = useState("");
   const [ref, visible] = useScrollReveal();
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async() => {
     if (email) {
       setSubscribed(true);
       setTimeout(() => setSubscribed(false), 2000);
+      try{
+        const response = await fetch("/api/postDB",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({emailId: email}),
+        });
+        const data = response.json();
+        if(data){
+          console.log(data.insertedId);
+        } else {
+          console.error("Data posting to DB failed.");
+        }
+      }catch(e){
+          console.error(e);
+      } 
     }
   };
 
